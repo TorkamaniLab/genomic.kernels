@@ -72,8 +72,8 @@ kernelMatrix.weighted.linear.kernel <- function(kernel, x, y=NULL){
   
   w = kpar(kernel)$w
   
-  k = function(x, y) crossprod(y, w*t(x))
-  
+  k = function(x, y) y %*% (w*t(x))
+
   if(is.null(y)) k(x,x) else 
     k(x,y)
 }
@@ -97,8 +97,8 @@ kernelMatrix.state.kernel <- function(kernel, x, y=NULL){
 
 }
 setMethod("kernelMatrix",
-          signature(kernel="weighted.linear.kernel"),
-          kernelMatrix.weighted.linear.kernel)
+          signature(kernel="weighted.state.kernel"),
+          kernelMatrix.state.kernel)
 
 
 
